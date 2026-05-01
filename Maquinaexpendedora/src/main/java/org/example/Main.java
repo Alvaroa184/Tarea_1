@@ -1,6 +1,5 @@
 package org.example;
-
-
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -56,23 +55,45 @@ public class Main {
     } catch (NoHayProductoException e) {
         System.out.println(e.getMessage());
     }
-        System.out.println();
-        System.out.println("prueba 4:");
-        try {
-            Comprador c = new Comprador(new Moneda100(), TipoProducto.COCACOLA, exp);
+    System.out.println();
+    System.out.println("prueba 4:");
+    try {
+        Comprador c = new Comprador(new Moneda100(), TipoProducto.COCACOLA, exp);
 
-            System.out.println("tomaste una: " + c.queBebiste());
-            System.out.println("tu vuelto es: " + c.cuantoVuelto());
+        System.out.println("tomaste una: " + c.queBebiste());
+        System.out.println("tu vuelto es: " + c.cuantoVuelto());
 
-        } catch (PagoIncorrectoException e) {
-            System.out.println(e.getMessage());
+    } catch (PagoIncorrectoException e) {
+        System.out.println(e.getMessage());
 
-        } catch (PagoInsuficienteException e) {
-            System.out.println(e.getMessage());
+    } catch (PagoInsuficienteException e) {
+        System.out.println(e.getMessage());
 
-        } catch (NoHayProductoException e) {
-            System.out.println(e.getMessage());
-        }
-}
+    } catch (NoHayProductoException e) {
+        System.out.println(e.getMessage());
+    }
 
+    System.out.println();
+    System.out.println("prueba 5:");
+
+    ArrayList<Moneda> comparador = new ArrayList<>();
+    comparador.add(new Moneda1000());
+    comparador.add(new Moneda500());
+    comparador.add(new Moneda100());
+    comparador.add(new Moneda1500());
+
+    System.out.println("Antes de ordenar:");
+    for(int i = 0; i < comparador.size(); i++){
+        Moneda m = comparador.get(i);
+        System.out.println(m.toString());
+    }
+
+    comparador.sort(null);
+
+    System.out.println("Despues de ordenar:");
+    for(int i = 0; i < comparador.size(); i++){
+        Moneda m = comparador.get(i);
+        System.out.println(m.toString());
+    }
+    }
 }

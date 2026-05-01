@@ -1,9 +1,14 @@
 package org.example;
 
-abstract class Moneda implements Comparable<Moneda> {    public Moneda() {
+abstract class Moneda implements Comparable<Moneda> {
+    private static int registro = 1000;
+    private int serie;
+
+    public Moneda() {
+        this.serie=registro++;
     }
-    public Moneda getSerie() {
-        return this;
+    public int getSerie() {
+        return serie;
     }
     public abstract int getValor();
     @Override
