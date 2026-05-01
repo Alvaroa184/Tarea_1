@@ -2,6 +2,10 @@ package org.example;
 import java.util.ArrayList;
 
 
+/**
+ * Clase principal que contiene las pruebas automáticas,
+ * para verificar el funcionamiento de la máquina expendedora.
+ */
 public class Main {
     public static void main(String[] args) {
          System.out.println("prueba 1:");

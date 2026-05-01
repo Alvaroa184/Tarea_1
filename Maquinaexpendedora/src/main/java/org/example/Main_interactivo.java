@@ -1,6 +1,9 @@
 package org.example;
 import java.util.Scanner;
 
+/**
+ * Clase principal que permite al usuario interactuar con la máquina expendedora.
+ */
 public class Main_interactivo{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
