@@ -1,61 +1,46 @@
 package org.example;
 
 class Expendedor {
-    public static final int COCA=1;
-    public static final int SPRITE =2;
 
-    private Deposito depositococa;
-    private Deposito depositosprite;
-    private Deposito depositomonvu;
-    private int precioBebidas;
+    private Deposito<Producto> depositoCoca;
+    private Deposito<Producto> depositoSprite;
+    private Deposito<Producto> depositoFanta;
+    private Deposito<Producto> depositoSnickers;
+    private Deposito<Producto> depositoSuper8;
+    private Deposito<Moneda> depositoVuelto;
 
-    public Expendedor(int numBebidas, int precioBebidas) {
-        depositococa = new Deposito();
-        depositosprite = new Deposito();
-        depositomonvu = new Deposito();
+    public Expendedor(int numProductos) {
+        depositoCoca = new Deposito<>();
+        depositoSprite = new Deposito<>();
+        depositoFanta = new Deposito<>();
+        depositoSnickers = new Deposito<>();
+        depositoSuper8 = new Deposito<>();
+        depositoVuelto = new Deposito<>();
 
-        for (int i = 0; i < numBebidas; i++) {
-            CocaCola cocaCola = new CocaCola(100 + i);
-            depositococa.addBebida(cocaCola);
-
-            Sprite sprite = new Sprite(200 + i);
-            depositosprite.addBebida(sprite);
+        for (int i = 0; i < numProductos; i++) {
+            depositoCoca.add(new CocaCola());
+            depositoSprite.add((new Sprite()));
+            depositoFanta.add(new Fanta());
+            depositoSnickers.add(new Snickers());
+            depositoSuper8.add(new Super8());
         }
 
-        this.precioBebidas = precioBebidas;
     }
 
-    public Bebida comprarBebida(Moneda moneda, int cual) {
-        if (moneda == null) {
-            return null;
-        }
-        Deposito depositoElegido = null;
-        if (cual == COCA) {
-            depositoElegido = depositococa;
-        } else if (cual == SPRITE) {
-            depositoElegido = depositosprite;
-        } else {
-            depositomonvu.addMoneda(moneda);
-            return null;
-        }
-        if (moneda.getValor() < precioBebidas) {
-            depositomonvu.addMoneda(moneda);
-            return null;
-        }
-        Bebida b = depositoElegido.getBebida();
+    public Producto comprarProducto(Moneda moneda, TipoProducto tipo) {
 
-        if (b == null) {
-            depositomonvu.addMoneda(moneda);
-            return null;
-        }
-        int diferencia = moneda.getValor() - precioBebidas;
+        //Agregar Excepciones(Revision)//
+
+        int precio = tipo.getPrecio();
+        int diferencia = moneda.getValor() - precio;
         while (diferencia >= 100) {
-            depositomonvu.addMoneda(new Moneda100());
+            depositoVuelto.add(new Moneda100());
             diferencia -= 100;
         }
-        return b;
+
+        return null; //Temporal, agregando las excepciones retornara el producto comprado//
     }
     public Moneda getVuelto() {
-        return depositomonvu.getMoneda();
+        return depositoVuelto.get();
     }
 }
