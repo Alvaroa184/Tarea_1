@@ -4,6 +4,75 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
+         System.out.println("prueba 1:");
+        Expendedor exp = new Expendedor(0);
+        try {
+            Comprador c = new Comprador(new Moneda1500(), TipoProducto.COCACOLA, exp);
+
+            System.out.println("tomaste: " + c.queBebiste());
+            System.out.println("tu vuelto es: " + c.cuantoVuelto());
+
+        } catch (PagoIncorrectoException e) {
+            System.out.println(e.getMessage());
+
+        } catch (PagoInsuficienteException e) {
+            System.out.println(e.getMessage());
+
+        } catch (NoHayProductoException e) {
+            System.out.println(e.getMessage());
+        }
+        exp=new Expendedor(6);
+         System.out.println();
+         System.out.println(("prueba 2:"));
+        try {
+            Comprador c = new Comprador(new Moneda1500(), TipoProducto.COCACOLA, exp);
+
+            System.out.println("tomaste una: " + c.queBebiste());
+            System.out.println("tu vuelto es: " + c.cuantoVuelto());
+
+        } catch (PagoIncorrectoException e) {
+            System.out.println(e.getMessage());
+
+        } catch (PagoInsuficienteException e) {
+            System.out.println(e.getMessage());
+
+        } catch (NoHayProductoException e) {
+            System.out.println(e.getMessage());
+        }
+        System.out.println();
+         System.out.println("prueba 3:");
+        try {
+        Comprador c = new Comprador(null, TipoProducto.COCACOLA, exp);
+
+        System.out.println("tomaste una: " + c.queBebiste());
+        System.out.println("tu vuelto es: " + c.cuantoVuelto());
+
+    } catch (PagoIncorrectoException e) {
+        System.out.println(e.getMessage());
+
+    } catch (PagoInsuficienteException e) {
+        System.out.println(e.getMessage());
+
+    } catch (NoHayProductoException e) {
+        System.out.println(e.getMessage());
     }
+        System.out.println();
+        System.out.println("prueba 4:");
+        try {
+            Comprador c = new Comprador(new Moneda100(), TipoProducto.COCACOLA, exp);
+
+            System.out.println("tomaste una: " + c.queBebiste());
+            System.out.println("tu vuelto es: " + c.cuantoVuelto());
+
+        } catch (PagoIncorrectoException e) {
+            System.out.println(e.getMessage());
+
+        } catch (PagoInsuficienteException e) {
+            System.out.println(e.getMessage());
+
+        } catch (NoHayProductoException e) {
+            System.out.println(e.getMessage());
+        }
 }
 
+}

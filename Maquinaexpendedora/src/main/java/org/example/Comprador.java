@@ -4,13 +4,13 @@ class Comprador {
     private int vuelto;
     private String sonido;
 
-    public Comprador(Moneda m, int cualBebida, Expendedor exp) {
-        Bebida b = exp.comprarBebida(m, cualBebida);
+    public Comprador(Moneda m, TipoProducto tipo, Expendedor exp)
+            throws PagoIncorrectoException, PagoInsuficienteException, NoHayProductoException {
 
-        if (b != null) {
-            sonido = b.beber();
-        } else {
-            sonido = null;
+        Producto p = exp.comprarProducto(m, tipo);
+
+        if (p != null) {
+            sonido = p.getSabor();
         }
 
         Moneda vueltomoneda;

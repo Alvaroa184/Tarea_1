@@ -27,18 +27,46 @@ class Expendedor {
 
     }
 
-    public Producto comprarProducto(Moneda moneda, TipoProducto tipo) {
+    public Producto comprarProducto(Moneda moneda, TipoProducto tipo) throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException {
 
-        //Agregar Excepciones(Revision)//
 
         int precio = tipo.getPrecio();
+
+        if (moneda==null){
+            throw new PagoIncorrectoException ("No hay monedas");
+        }
+        if (moneda.getValor()<precio){
+            depositoVuelto.add(moneda);
+            throw new PagoInsuficienteException("No hay suficiente dinero");
+        }
+        Producto producto=null;
+        if (tipo==TipoProducto.COCACOLA){
+            producto = depositoCoca.get();
+        }
+        else if (tipo==TipoProducto.SPRITE){
+            producto = depositoSprite.get();
+        }
+        else if (tipo==TipoProducto.SNICKERS){
+            producto = depositoSnickers.get();
+        }
+        else if (tipo==TipoProducto.SUPER8){
+            producto = depositoSuper8.get();
+        }
+        else if (tipo== TipoProducto.FANTA){
+            producto = depositoFanta.get();
+        }
+        if (producto==null){
+            depositoVuelto.add(moneda);
+            throw new NoHayProductoException("No hay producto actualmente");
+        }
+
         int diferencia = moneda.getValor() - precio;
         while (diferencia >= 100) {
             depositoVuelto.add(new Moneda100());
             diferencia -= 100;
         }
 
-        return null; //Temporal, agregando las excepciones retornara el producto comprado//
+        return producto;
     }
     public Moneda getVuelto() {
         return depositoVuelto.get();
