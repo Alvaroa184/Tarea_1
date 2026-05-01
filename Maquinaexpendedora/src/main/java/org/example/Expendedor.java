@@ -1,5 +1,9 @@
 package org.example;
 
+/**
+ * Molde de una maquina expendedora que guarda productos en depositos.
+ * Procesa el pago y vuelto de cada venta.
+ */
 class Expendedor {
 
     private Deposito<Producto> depositoCoca;
@@ -9,6 +13,10 @@ class Expendedor {
     private Deposito<Producto> depositoSuper8;
     private Deposito<Moneda> depositoVuelto;
 
+    /**
+     * Crea un expendedor con una cantidad inicial de productos en cada deposito.
+     * @param numProductos La cantidad inicial que tendra cada deposito.
+     */
     public Expendedor(int numProductos) {
         depositoCoca = new Deposito<>();
         depositoSprite = new Deposito<>();
@@ -27,7 +35,17 @@ class Expendedor {
 
     }
 
-    public Producto comprarProducto(Moneda moneda, TipoProducto tipo) throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException {
+    /**
+     * Realiza la logica de compra: valida el pago, verifica stock y calcula el vuelto.
+     * @param moneda La moneda ulizada para pagar.
+     * @param tipo El producto seleccionado.
+     * @return El producto seleccionado si la operacion fue exitosa.
+     * @throws PagoIncorrectoException Si la moneda entregada es null (No ingreso ninguna).
+     * @throws NoHayProductoException Si no hay stock disponible.
+     * @throws PagoInsuficienteException Si el valor de la moneda no alcanza a pagar el valor del producto.
+     */
+    public Producto comprarProducto(Moneda moneda, TipoProducto tipo)
+            throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException {
 
 
         int precio = tipo.getPrecio();
@@ -68,6 +86,11 @@ class Expendedor {
 
         return producto;
     }
+
+    /**
+     * Saca de a una moneda de 100 del deposito de vuelto.
+     * @return Una moneda de 100 si quedara en el deposito de vuelto.
+     */
     public Moneda getVuelto() {
         return depositoVuelto.get();
     }
